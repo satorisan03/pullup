@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>20 Pull-Ups</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="20 Pull-Ups">
+<meta name="theme-color" content="#04060e">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="apple-touch-icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' fill='%2304060e'/><text x='90' y='118' font-family='Rajdhani,sans-serif' font-size='120' font-weight='700' text-anchor='middle' fill='%2300f0ff'>⬡</text></svg>">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#04060e;
+  --bg-2:#060910;
+  --panel:#0b0f1c;
+  --panel-2:#0f1422;
+  --border:#1a2038;
+  --border-hi:#2a3560;
+  --text:#d8e8ff;
+  --text-dim:#5a7099;
+  --bat:#00f0ff;        /* neon cyan — primary cyberpunk accent */
+  --bat-dim:#00b8c4;
+  --steel:#7b3fe4;      /* electric violet */
+  --bronze:#ff4fd8;     /* hot magenta */
+  --slate:#4a5880;
+  --danger:#ff2d55;
+  --radius-lg:4px;
+  --radius-md:3px;
+  --shadow-soft:0 1px 0 rgba(0,240,255,.04) inset, 0 2px 6px rgba(0,0,0,.8), 0 0 18px -8px rgba(0,240,255,.12);
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--bg);
+  background-image:
+    repeating-linear-gradient(0deg, rgba(0,240,255,.018) 0px, rgba(0,240,255,.018) 1px, transparent 1px, transparent 4px),
+    radial-gradient(ellipse at 50% 0%, rgba(0,240,255,.07) 0%, transparent 60%);
+  color:var(--text);
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  padding-bottom:60px;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+/* cyberpunk neon top glow */
+body::before{
+  content:'';position:fixed;top:-120px;left:50%;transform:translateX(-50%);
+  width:600px;height:300px;pointer-events:none;z-index:0;
+  background:radial-gradient(ellipse at center, rgba(0,240,255,.13) 0%, rgba(123,63,228,.06) 45%, transparent 70%);
+  filter:blur(8px);
+}
+.wrap{max-width:760px;margin:0 auto;padding:max(22px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 0 max(16px, env(safe-area-inset-left));position:relative;z-index:1;}
+body{padding-bottom:max(60px, env(safe-area-inset-bottom));}
+h1,h2,h3{font-family:'Rajdhani',sans-serif;text-transform:uppercase;letter-spacing:.06em;margin:0;}
+.mono{font-family:'Share Tech Mono',monospace;}
+button{font-family:'Inter',sans-serif;cursor:pointer;}
+:focus-visible{outline:2px solid var(--bat);outline-offset:2px;}
+@media (prefers-reduced-motion:reduce){ *{animation:none !important; transition:none !important;} }
+
+/* header */
+.topbar{display:flex;align-items:center;gap:12px;margin-bottom:4px;}
+.bat-mark{width:40px;height:22px;flex-shrink:0;}
+.bat-mark path{fill:var(--bat);}
+.topbar h1{font-size:23px;font-weight:700;color:var(--text);line-height:1;}
+.topbar h1 .thin{color:var(--text-dim);font-weight:400;}
+.goal-chip{margin-left:auto;font-size:11px;color:var(--bat);font-family:'Share Tech Mono',monospace;
+  border:1px solid var(--border-hi);border-radius:6px;padding:4px 8px;letter-spacing:.05em;}
+.subtitle{color:var(--text-dim);font-size:12.5px;margin:6px 0 18px;letter-spacing:.02em;
+  text-transform:uppercase;font-family:'Rajdhani',sans-serif;font-weight:400;}
+
+/* pill tabs */
+.tabs{display:inline-flex;gap:3px;background:var(--panel);border:1px solid var(--border);padding:4px;border-radius:9px;
+  margin-bottom:18px;max-width:100%;overflow-x:auto;}
+.tab-btn{background:none;border:none;color:var(--text-dim);padding:8px 16px;font-size:11.5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.06em;border-radius:6px;white-space:nowrap;font-family:'Rajdhani',sans-serif;}
+.tab-btn.active{background:transparent;color:var(--bat);border:1px solid var(--bat);box-shadow:0 0 10px rgba(0,240,255,.3),inset 0 0 8px rgba(0,240,255,.08);}
+.view{display:none;}
+.view.active{display:block;animation:fade .25s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+
+/* bento grid */
+.bento-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:14px;align-items:start;}
+@media (min-width:640px){.bento-grid{grid-template-columns:repeat(4,1fr);gap:14px;}}
+.tile{background:linear-gradient(160deg, rgba(11,15,28,.98) 0%, rgba(6,9,16,.99) 100%);
+  border:1px solid var(--border);border-radius:var(--radius-lg);
+  padding:16px;box-shadow:var(--shadow-soft);position:relative;overflow:hidden;}
+.tile::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,240,255,.25),transparent);}
+.tile::after{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:linear-gradient(180deg,rgba(0,240,255,.35),transparent);}
+.t-stat{grid-column:span 1;}
+.t-med{grid-column:span 2;}
+.t-hero{grid-column:span 2;}
+.t-full{grid-column:span 2;}
+@media (min-width:640px){ .t-hero{grid-column:span 4;} .t-full{grid-column:span 4;} }
+.tile-title{font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.12em;margin-bottom:10px;
+  font-family:'Rajdhani',sans-serif;font-weight:500;}
+
+/* icon badge */
+.tile-icon{width:28px;height:28px;border-radius:7px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:10px;border:1px solid var(--border);}
+.tile-icon svg{width:15px;height:15px;}
+
+/* stat tiles */
+.stat-num{font-family:'Share Tech Mono',monospace;font-size:23px;font-weight:600;line-height:1;color:var(--text);}
+.stat-lbl{font-size:9.5px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-top:6px;font-family:'Rajdhani',sans-serif;}
+
+/* hero (today prescription) tile */
+.hero-emblem{position:absolute;right:-18px;bottom:-14px;width:190px;opacity:.05;pointer-events:none;}
+.hero-emblem path{fill:currentColor;}
+.hero-badge{display:inline-block;font-size:10px;padding:4px 11px;border-radius:5px;font-weight:600;
+  text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px;font-family:'Rajdhani',sans-serif;
+  border:1px solid currentColor;}
+.hero-name{font-size:25px;font-weight:600;margin-bottom:4px;color:var(--text);}
+.hero-meta{color:var(--text-dim);font-size:12px;margin-bottom:16px;letter-spacing:.02em;}
+.hero-note{color:#aab1b8;font-size:13.5px;line-height:1.6;margin:14px 0 16px;position:relative;}
+.rx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:4px;position:relative;}
+.rx-box{background:rgba(0,0,0,.28);border:1px solid var(--border);border-radius:8px;padding:12px 8px;text-align:center;}
+.rx-box .num{font-family:'Share Tech Mono',monospace;font-size:21px;font-weight:600;color:var(--text);}
+.rx-box .lbl{font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;margin-top:3px;font-family:'Rajdhani',sans-serif;}
+.ladder-seq{font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-dim);background:rgba(0,0,0,.28);
+  border:1px solid var(--border);border-radius:8px;padding:8px 10px;margin:10px 0;position:relative;}
+
+/* buttons */
+.btn{background:var(--bat);color:#141101;border:none;border-radius:7px;padding:12px 18px;font-weight:700;
+  font-size:13px;text-transform:uppercase;letter-spacing:.06em;font-family:'Rajdhani',sans-serif;
+  box-shadow:0 2px 10px -2px rgba(244,197,24,.4);}
+.btn:active{transform:scale(.98);}
+.btn.secondary{background:transparent;border:1px solid var(--border-hi);color:var(--text);box-shadow:none;}
+.btn.ghost{background:transparent;border:none;color:var(--text-dim);font-size:12px;text-decoration:underline;padding:4px;box-shadow:none;letter-spacing:.02em;text-transform:none;font-family:'Inter',sans-serif;}
+.btn.small{padding:8px 12px;font-size:11px;border-radius:6px;}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;}
+.btn-cta{width:100%;text-align:center;position:relative;}
+
+/* forms */
+label{display:block;font-size:11px;color:var(--text-dim);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;font-family:'Rajdhani',sans-serif;}
+input[type=number],input[type=text],textarea{
+  width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:7px;color:var(--text);
+  padding:10px;font-family:'Share Tech Mono',monospace;font-size:15px;margin-bottom:14px;}
+input:focus,textarea:focus{border-color:var(--bat);outline:none;}
+textarea{font-family:'Inter',sans-serif;font-size:13.5px;min-height:56px;resize:vertical;}
+.set-rows{display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.set-row{display:flex;align-items:center;gap:10px;}
+.set-row .idx{width:52px;font-family:'Share Tech Mono',monospace;font-size:12px;color:var(--text-dim);flex-shrink:0;}
+.set-row input{margin-bottom:0;}
+.set-row .rm{background:none;border:none;color:var(--danger);font-size:18px;padding:0 6px;flex-shrink:0;}
+.diff-group{display:flex;gap:8px;margin-bottom:2px;}
+.diff-opt{flex:1;text-align:center;padding:10px 4px;border:1px solid var(--border);border-radius:7px;
+  font-size:11.5px;color:var(--text-dim);background:rgba(0,0,0,.28);font-family:'Rajdhani',sans-serif;letter-spacing:.03em;}
+.diff-opt.selected{border-color:var(--bat);color:var(--bat);background:rgba(0,240,255,.08);box-shadow:0 0 8px rgba(0,240,255,.2);}
+
+/* banner */
+.banner p{margin:0 0 10px;font-size:13.5px;color:var(--text);line-height:1.55;}
+
+/* progress bar */
+.pbar-track{background:rgba(0,0,0,.4);border:1px solid var(--border);border-radius:6px;height:12px;overflow:hidden;margin:8px 0;}
+.pbar-fill{height:100%;background:linear-gradient(90deg,var(--steel),var(--bat));border-radius:2px;box-shadow:0 0 8px rgba(0,240,255,.4);}
+.pbar-caption{display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim);font-family:'Share Tech Mono',monospace;}
+
+/* empty state */
+.empty{text-align:center;padding:32px 12px;color:var(--text-dim);}
+.empty h3{color:var(--text);margin-bottom:8px;font-size:16px;}
+
+/* tally wall */
+.tally-wall{display:flex;flex-wrap:wrap;gap:10px;padding:2px 0 4px;}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;font-size:10px;color:var(--text-dim);font-family:'Rajdhani',sans-serif;letter-spacing:.04em;}
+.legend span{display:inline-flex;align-items:center;gap:5px;}
+.dot{width:8px;height:8px;border-radius:1px;display:inline-block;}
+
+/* mini list rows */
+.mini-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:12.5px;}
+.mini-row:last-child{border-bottom:none;}
+.mini-row .d{color:var(--text-dim);}
+.mini-row .r{font-family:'Share Tech Mono',monospace;color:var(--text);}
+
+/* history list */
+.hist-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);}
+.hist-item:last-child{border-bottom:none;}
+.hist-left .d{font-size:13px;font-weight:600;}
+.hist-left .t{font-size:11.5px;color:var(--text-dim);}
+.hist-right{text-align:right;}
+.hist-right .r{font-family:'Share Tech Mono',monospace;font-size:15px;}
+.hist-right .x{font-size:10px;color:var(--text-dim);}
+
+
+.cyber-logo{font-size:28px;color:var(--bat);text-shadow:0 0 10px var(--bat),0 0 24px rgba(0,240,255,.6);
+  line-height:1;flex-shrink:0;display:inline-block;}
+.bat-mark{width:auto;height:auto;flex-shrink:0;}
+
+footer{text-align:center;padding:22px 0 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar">
+<span class="cyber-logo">⬡</span>
+    <h1>20 <span class="thin">Pull-Ups</span></h1>
+    <span class="goal-chip">TARGET_REP=20</span>
+  </div>
+  <div class="subtitle">ADAPTIVE PROTOCOL // 4× MAX VOL</div>
+
+  <div id="app">
+    <div class="empty">Loading…</div>
+  </div>
+
+  <footer>
+    <button class="btn ghost" id="resetBtn">Reset all program data</button>
+  </footer>
+</div>
+
+<script>
+const KEY_PROFILE = '20barfiks-profile';
+const KEY_WORKOUTS = '20barfiks-workouts';
+
+const BAT_EMBLEM = '<svg class="hero-emblem" viewBox="0 0 120 120" aria-hidden="true" style="position:absolute;right:-10px;bottom:-10px;width:180px;opacity:.06;pointer-events:none;"><defs><pattern id="hex" patternUnits="userSpaceOnUse" width="20" height="23"><polygon points="10,1 19,6 19,17 10,22 1,17 1,6" fill="none" stroke="currentColor" stroke-width="0.8"/></pattern></defs><rect width="120" height="120" fill="url(#hex)"/></svg>';
+
+let profile = null;
+let workouts = [];
+let activeTab = 'today';
+let logSetRows = [];
+let currentRx = null;
+let pendingMaxUpdate = null; // {newMax, fromZero}
+let infoNotice = null;
+
+/* ---------- storage (localStorage — works offline as standalone app) ---------- */
+async function loadProfile(){
+  try{ const v = localStorage.getItem(KEY_PROFILE); return v ? JSON.parse(v) : null; }
+  catch(e){ return null; }
+}
+async function saveProfile(p){
+  try{ localStorage.setItem(KEY_PROFILE, JSON.stringify(p)); }catch(e){ console.error('Save failed — storage may be full or private mode is on', e); }
+}
+async function loadWorkouts(){
+  try{ const v = localStorage.getItem(KEY_WORKOUTS); return v ? JSON.parse(v) : []; }
+  catch(e){ return []; }
+}
+async function saveWorkouts(w){
+  try{ localStorage.setItem(KEY_WORKOUTS, JSON.stringify(w)); }catch(e){ console.error('Save failed', e); }
+}
+
+/* ---------- date helpers ---------- */
+function todayStr(){
+  const d = new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function daysBetween(a,b){ return Math.round((new Date(b) - new Date(a)) / 86400000); }
+function fmtDate(iso){
+  const d = new Date(iso+'T00:00:00');
+  return d.toLocaleDateString(undefined,{month:'short',day:'numeric'});
+}
+
+/* ---------- color helper ---------- */
+function hexToRgba(hex, a){
+  const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16);
+  return `rgba(${r},${g},${b},${a})`;
+}
+
+/* ---------- escape user-supplied text before inserting into innerHTML ---------- */
+function esc(s){
+  return String(s==null?'':s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+/* ---------- icons ---------- */
+const ICON_PATHS = {
+  bars: '<path d="M4 20V10M12 20V4M20 20v-6"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="3"/><path d="M16 3v4M8 3v4M3 10h18"/>',
+  pulse: '<path d="M3 12h4l2 7 4-14 2 7h6"/>',
+  target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/>',
+  list: '<path d="M4 6h16M4 12h16M4 18h10"/>',
+  bolt: '<path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z"/>'
+};
+function icon(name, color){
+  return `<span class="tile-icon" style="background:${hexToRgba(color,.14)};color:${color};border-color:${hexToRgba(color,.35)}">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICON_PATHS[name]}</svg>
+  </span>`;
+}
+
+/* ---------- session context & freshness ---------- */
+function getSessionContext(){
+  if(workouts.length===0) return {sameday:false, daysSince:null, lastEntry:null};
+  const sorted = workouts.slice().sort((a,b)=> a.date.localeCompare(b.date));
+  const last = sorted[sorted.length-1];
+  const d = daysBetween(last.date, todayStr());
+  return {sameday: d<=0, daysSince: d, lastEntry: last};
+}
+
+function freshnessBucket(daysSince){
+  if(daysSince===null) return 'first';
+  if(daysSince<=1) return 'justTrained';
+  if(daysSince<=3) return 'onSchedule';
+  if(daysSince<=6) return 'shortLayoff';
+  if(daysSince<=13) return 'longerLayoff';
+  return 'extendedBreak';
+}
+
+// freshness scales the 5x-max daily volume for recovery. On-schedule = full 5x.
+const FRESH_FACTOR = {
+  first:1.0, justTrained:0.6, onSchedule:1.0, shortLayoff:1.0, longerLayoff:0.8, extendedBreak:0.6
+};
+
+const DAY_META = {
+  foundation: {name:'Foundation (Zero-to-One)', color:'#6a747f', badge:'BUILDING'},
+  max:        {name:'Max Effort Day', color:'#00f0ff', badge:'MAX DAY'},
+  submax:     {name:'Sub-Max Volume Day', color:'#5c7d9c', badge:'VOLUME'},
+  ladder:     {name:'Ascending Ladder Day', color:'#c2883f', badge:'LADDERS'}
+};
+
+function realSessionCount(){
+  return workouts.filter(w => w.role !== 'foundation').length;
+}
+function dailyVolumeTarget(M, factor){
+  return Math.max(1, Math.round(4 * M * factor));
+}
+
+/* ---------- session plan ---------- */
+function buildSessionPlan(){
+  const ctx = getSessionContext();
+  if(ctx.sameday) return {sameday:true, lastEntry:ctx.lastEntry};
+
+  const M = profile.maxReps;
+  const fresh = freshnessBucket(ctx.daysSince);
+
+  // Zero-to-one phase
+  if(M===0){
+    const table = {
+      first:{sets:4,reps:3,rest:90}, justTrained:{sets:3,reps:2,rest:75}, onSchedule:{sets:5,reps:3,rest:90},
+      shortLayoff:{sets:4,reps:3,rest:90}, longerLayoff:{sets:3,reps:2,rest:90}, extendedBreak:{sets:3,reps:2,rest:120}
+    };
+    const t = table[fresh];
+    return {
+      sameday:false, role:'foundation', freshness:fresh, daysSince:ctx.daysSince,
+      exercise:'Negatives + Jumping Pull-Ups', structure:'straight',
+      sets:t.sets, reps:t.reps, restSec:t.rest, totalTarget:t.sets*t.reps,
+      note:'Jump or step up so your chin clears the bar, then lower yourself under control for a slow 5-count. This builds the strength for your first real rep — no strict pull-ups required yet.'
+    };
+  }
+
+  const sessionNumber = realSessionCount()+1;
+  const isMax = (sessionNumber-1) % 3 === 0; // sessions 1, 4, 7, 10...
+  const factor = FRESH_FACTOR[fresh];
+  const dailyTarget = dailyVolumeTarget(M, factor);
+
+  if(isMax){
+    let sets = 3;
+    if(fresh==='justTrained' || fresh==='extendedBreak') sets = 2;
+    const caution = (sets===2)
+      ? ' Volume is scaled to 2 sets because you\u2019re not fully recovered — if you don\u2019t feel fresh, pushing this to your next session is completely fine.'
+      : '';
+    return {
+      sameday:false, role:'max', freshness:fresh, daysSince:ctx.daysSince, sessionNumber,
+      exercise:'Pull-Ups', structure:'straight',
+      sets, reps:null, restSec:300, totalTarget:null,
+      note:'Every set is a true max effort. Hold one rep standard for the whole program (full range of motion, chin over the bar, no kipping) and end each set the moment a rep falls short. Your best set today becomes your max and re-sizes every other day to 4× that number.'+caution
+    };
+  }
+
+  const nonMaxDone = workouts.filter(w=> w.role==='submax' || w.role==='ladder').length;
+  const isSubMax = nonMaxDone % 2 === 0;
+
+  if(isSubMax){
+    const reps = Math.max(1, Math.ceil(M/2));
+    const sets = Math.max(1, Math.round(dailyTarget / reps));
+    return {
+      sameday:false, role:'submax', freshness:fresh, daysSince:ctx.daysSince, sessionNumber,
+      exercise:'Pull-Ups', structure:'straight',
+      sets, reps, restSec:60, totalTarget:sets*reps,
+      note:`Strict 60-second rest between sets — no exceptions, even if you feel ready sooner. Keep every rep clean; if you can't hit ${reps} on a set, bank what you can and move on. The set count is set so your total lands at 4× your max for the day.`
+    };
+  }
+
+  const estTop = Math.max(2, Math.round(M*0.6));
+  const ladderSum = estTop*(estTop+1)/2;
+  const ladders = Math.max(1, Math.round(dailyTarget / ladderSum));
+  return {
+    sameday:false, role:'ladder', freshness:fresh, daysSince:ctx.daysSince, sessionNumber,
+    exercise:'Pull-Ups', structure:'kladder',
+    ladderCount:ladders, estimatedTop:estTop, restSec:30, totalTarget:ladders*ladderSum,
+    note:`Strict 30-second rest between every set. Start each ladder at 1 rep and climb by 1 each set until a set takes real effort, then reset to 1 and start the next ladder. The ladder count is set so your total lands near 4× your max (rung ~${estTop} is a rough guide for where it gets hard).`
+  };
+}
+
+function defaultSetTargets(rx){
+  if(rx.structure==='kladder'){
+    let all=[];
+    for(let i=0;i<rx.ladderCount;i++){
+      for(let r=1;r<=rx.estimatedTop;r++) all.push(r);
+    }
+    return all;
+  }
+  const fillVal = rx.reps===null ? Math.max(1, profile.maxReps) : rx.reps;
+  return Array(rx.sets).fill(fillVal);
+}
+
+function rxBoxesHtml(rx){
+  if(rx.role==='max'){
+    return `<div class="rx-grid">
+      <div class="rx-box"><div class="num">${rx.sets}</div><div class="lbl">Sets</div></div>
+      <div class="rx-box"><div class="num">MAX</div><div class="lbl">Effort</div></div>
+      <div class="rx-box"><div class="num">5:00+</div><div class="lbl">Rest</div></div>
+    </div>`;
+  }
+  if(rx.role==='submax'){
+    return `<div class="rx-grid">
+      <div class="rx-box"><div class="num">${rx.sets}</div><div class="lbl">Sets</div></div>
+      <div class="rx-box"><div class="num">${rx.reps}</div><div class="lbl">Reps/set</div></div>
+      <div class="rx-box"><div class="num">${rx.restSec}s</div><div class="lbl">Rest (strict)</div></div>
+    </div>`;
+  }
+  if(rx.role==='ladder'){
+    return `<div class="rx-grid">
+      <div class="rx-box"><div class="num">${rx.ladderCount}</div><div class="lbl">Ladders</div></div>
+      <div class="rx-box"><div class="num">~${rx.estimatedTop}</div><div class="lbl">Est. top rung</div></div>
+      <div class="rx-box"><div class="num">${rx.restSec}s</div><div class="lbl">Rest (strict)</div></div>
+    </div>`;
+  }
+  return `<div class="rx-grid">
+    <div class="rx-box"><div class="num">${rx.sets}</div><div class="lbl">Sets</div></div>
+    <div class="rx-box"><div class="num">${rx.reps}</div><div class="lbl">Reps/set</div></div>
+    <div class="rx-box"><div class="num">${rx.restSec}s</div><div class="lbl">Rest</div></div>
+  </div>`;
+}
+
+/* ---------- weekly volume (informational) ---------- */
+function rollingVolume(days=7){
+  const cutoff = new Date(todayStr()); cutoff.setDate(cutoff.getDate()-(days-1));
+  return workouts.filter(w => new Date(w.date+'T00:00:00') >= cutoff).reduce((s,w)=> s+w.totalReps, 0);
+}
+
+/* ---------- render helpers ---------- */
+function el(html){ const d=document.createElement('div'); d.innerHTML=html.trim(); return d.firstChild; }
+function grid(){ return el('<div class="bento-grid"></div>'); }
+
+function renderApp(){
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  app.appendChild(renderTabs());
+  const viewToday = el('<div class="view" id="view-today"></div>');
+  const viewLog = el('<div class="view" id="view-log"></div>');
+  const viewHistory = el('<div class="view" id="view-history"></div>');
+  const viewProgress = el('<div class="view" id="view-progress"></div>');
+  [viewToday,viewLog,viewHistory,viewProgress].forEach(v=>app.appendChild(v));
+  renderToday();
+  renderLog();
+  renderHistory();
+  renderProgress();
+  showTab(activeTab);
+}
+
+function renderTabs(){
+  const tabs = [['today','Today'],['log','Log'],['history','History'],['progress','Progress']];
+  const bar = el('<div class="tabs"></div>');
+  tabs.forEach(([id,label])=>{
+    const btn = el(`<button class="tab-btn" data-tab="${id}">${label}</button>`);
+    btn.addEventListener('click', ()=>{ activeTab=id; showTab(id); });
+    bar.appendChild(btn);
+  });
+  return bar;
+}
+
+function showTab(id){
+  document.querySelectorAll('.view').forEach(v=> v.classList.toggle('active', v.id==='view-'+id));
+  document.querySelectorAll('.tab-btn').forEach(b=> b.classList.toggle('active', b.dataset.tab===id));
+}
+
+/* ----- Today ----- */
+function renderToday(){
+  const view = document.getElementById('view-today');
+  view.innerHTML = '';
+  const g = grid();
+  view.appendChild(g);
+
+  if(infoNotice){
+    const n = el(`
+      <div class="tile t-full banner" style="border-color:var(--bat);background:${hexToRgba('#00f0ff',.05)}">
+        <p>${infoNotice}</p>
+        <button class="btn secondary small" id="infoNoticeOk">Got it</button>
+      </div>`);
+    n.querySelector('#infoNoticeOk').addEventListener('click', ()=>{ infoNotice=null; renderApp(); });
+    g.appendChild(n);
+  }
+
+  if(pendingMaxUpdate){
+    const b = el(`
+      <div class="tile t-full banner" style="border-color:var(--bat);background:${hexToRgba('#00f0ff',.05)}">
+        <p><strong>${pendingMaxUpdate.fromZero ? 'First strict pull-up logged.' : 'New best set logged.'}</strong><br>
+        ${pendingMaxUpdate.fromZero
+          ? `You completed a strict pull-up. Start tracking your max at ${pendingMaxUpdate.newMax}? Daily volume becomes ${4*pendingMaxUpdate.newMax} reps.`
+          : `You hit ${pendingMaxUpdate.newMax} reps in a single set (tracked max: ${profile.maxReps}). Update your max? Daily volume becomes ${4*pendingMaxUpdate.newMax} reps.`}</p>
+        <div class="btn-row">
+          <button class="btn small" id="confirmMaxYes">Set max to ${pendingMaxUpdate.newMax}</button>
+          <button class="btn secondary small" id="confirmMaxNo">Not now</button>
+        </div>
+      </div>`);
+    b.querySelector('#confirmMaxYes').addEventListener('click', async ()=>{
+      profile.maxReps = pendingMaxUpdate.newMax;
+      profile.maxRepsHistory.push({date: todayStr(), reps: pendingMaxUpdate.newMax});
+      profile.lastTestDate = todayStr();
+      await saveProfile(profile);
+      pendingMaxUpdate = null;
+      renderApp();
+    });
+    b.querySelector('#confirmMaxNo').addEventListener('click', ()=>{ pendingMaxUpdate=null; renderApp(); });
+    g.appendChild(b);
+  }
+
+  const plan = buildSessionPlan();
+  const M = profile.maxReps;
+
+  if(plan.sameday){
+    const last = plan.lastEntry;
+    g.appendChild(el(`
+      <div class="tile t-hero" style="border-color:${hexToRgba('#5c7d9c',.4)}">
+        ${BAT_EMBLEM}
+        <span class="hero-badge" style="color:#5c7d9c">STAND DOWN</span>
+        <div class="hero-name">Already trained today</div>
+        <p class="hero-note">You logged ${last.totalReps} reps (top set ${last.topSet}) earlier today. Let it groove — return next session.</p>
+      </div>`));
+  } else {
+    currentRx = plan;
+    const meta = DAY_META[plan.role];
+    const daysLabel = plan.daysSince===null ? 'First session' : plan.daysSince+' day(s) since last session';
+    const sessionLabel = plan.role==='foundation' ? '' : ` · Session #${plan.sessionNumber}`;
+
+    let extraHtml = '';
+    if(plan.structure==='kladder'){
+      const seq = Array.from({length:plan.estimatedTop}, (_,i)=>i+1).join(' → ');
+      extraHtml = `<div class="ladder-seq">Each ladder: ${seq} → reset &nbsp;·&nbsp; ${plan.ladderCount} ladders</div>`;
+    }
+
+    let targetLine;
+    if(plan.role==='max'){
+      targetLine = `<div style="font-size:12px;color:var(--text-dim);margin-bottom:14px;position:relative;">Today is your test day — it sets the max that drives every other session's 4× volume.</div>`;
+    } else if(plan.totalTarget!=null){
+      const base = plan.freshness==='onSchedule'||plan.freshness==='shortLayoff'||plan.freshness==='first'
+        ? `4 × ${M}` : `scaled from 4 × ${M}`;
+      targetLine = `<div style="font-size:12px;color:var(--text-dim);margin-bottom:14px;position:relative;">Target volume today: <span class="mono" style="color:var(--bat)">${plan.totalTarget} reps</span> &nbsp;(${base})</div>`;
+    } else {
+      targetLine = '';
+    }
+
+    const hero = el(`
+      <div class="tile t-hero" style="border-color:${hexToRgba(meta.color,.4)}">
+        ${BAT_EMBLEM}
+        <span class="hero-badge" style="color:${meta.color}">${meta.badge}</span>
+        <div class="hero-name">${meta.name}</div>
+        <div class="hero-meta">${daysLabel}${sessionLabel} · ${plan.exercise}</div>
+        ${rxBoxesHtml(plan)}
+        ${extraHtml}
+        <p class="hero-note">${plan.note}</p>
+        ${targetLine}
+        <button class="btn btn-cta" id="logSessionBtn">Log This Session</button>
+      </div>`);
+    hero.querySelector('#logSessionBtn').addEventListener('click', ()=>{
+      logSetRows = defaultSetTargets(plan);
+      activeTab='log'; renderLog(); showTab('log');
+    });
+    g.appendChild(hero);
+  }
+
+  // stat tiles
+  const ctx = getSessionContext();
+  const daysSinceDisplay = ctx.daysSince===null ? '—' : ctx.daysSince;
+  const dailyT = M>0 ? 4*M : '—';
+  const goalPct = Math.min(100, Math.round((M/20)*100));
+
+  g.appendChild(el(`<div class="tile t-stat">${icon('bars','#00f0ff')}<div class="stat-num">${M}</div><div class="stat-lbl">Current Max</div></div>`));
+  g.appendChild(el(`<div class="tile t-stat">${icon('calendar','#5c7d9c')}<div class="stat-num">${daysSinceDisplay}</div><div class="stat-lbl">Days Since Last</div></div>`));
+  g.appendChild(el(`<div class="tile t-stat">${icon('bolt','#c2883f')}<div class="stat-num">${dailyT}</div><div class="stat-lbl">Daily Target (4×)</div></div>`));
+  g.appendChild(el(`<div class="tile t-stat">${icon('target','#00f0ff')}<div class="stat-num">${goalPct}%</div><div class="stat-lbl">To Goal (20)</div></div>`));
+
+  // mini progress ladder
+  const ladderTile = el(`<div class="tile t-med"><div class="tile-title">Progress Ladder</div></div>`);
+  ladderTile.appendChild(ladderSVG(M, 20, true));
+  g.appendChild(ladderTile);
+
+  // recent sessions
+  const recentTile = el(`<div class="tile t-med"><div class="tile-title">Recent Sessions</div></div>`);
+  if(workouts.length===0){
+    recentTile.appendChild(el(`<p style="font-size:12.5px;color:var(--text-dim);margin:0;">No sessions yet — log your first to see it here.</p>`));
+  } else {
+    const recent = workouts.slice().sort((a,b)=> (b.date+b.id).localeCompare(a.date+a.id)).slice(0,3);
+    recent.forEach(w=>{
+      const meta = DAY_META[w.role || w.dayType];
+      recentTile.appendChild(el(`<div class="mini-row"><span class="d">${fmtDate(w.date)} · ${meta?meta.name.split(' ')[0]:(w.role||w.dayType)}</span><span class="r mono">${w.totalReps}</span></div>`));
+    });
+  }
+  g.appendChild(recentTile);
+
+  // rolling 7-day volume (context only)
+  if(M>0){
+    const rv = rollingVolume(7);
+    const wk = 4*M*3; // ~3 sessions/week at 4x as a soft reference band
+    const pct = Math.min(100, Math.round(rv/wk*100));
+    g.appendChild(el(`
+      <div class="tile t-full">
+        <div class="tile-title">Rolling 7-Day Volume</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:${pct}%"></div></div>
+        <div class="pbar-caption"><span>${rv} reps done</span><span>~${wk} across a full week</span></div>
+      </div>`));
+  }
+}
+
+/* ----- Log ----- */
+function renderLog(){
+  const view = document.getElementById('view-log');
+  view.innerHTML = '';
+  const g = grid();
+  view.appendChild(g);
+
+  if(!currentRx || currentRx.sameday){
+    const plan = buildSessionPlan();
+    if(plan.sameday){
+      g.appendChild(el(`<div class="tile t-full empty"><h3>Session already logged today</h3><p>Check the Today tab for your summary, or log an extra set below if you trained again.</p></div>`));
+      currentRx = buildSessionPlanIgnoringSameday();
+    } else {
+      currentRx = plan;
+    }
+  }
+  if(logSetRows.length===0) logSetRows = defaultSetTargets(currentRx);
+
+  const roleName = currentRx.role ? ' — '+DAY_META[currentRx.role].name : '';
+  const setsTile = el(`<div class="tile t-full"><div class="tile-title">Log · ${currentRx.exercise}${roleName}</div></div>`);
+  const setsWrap = el('<div class="set-rows" id="setRows"></div>');
+  setsTile.appendChild(setsWrap);
+  renderSetRows(setsWrap);
+  const btnRow = el(`
+    <div class="btn-row">
+      <button class="btn secondary small" id="addSet">+ Add Set</button>
+      <button class="btn secondary small" id="rmSet">− Remove Set</button>
+    </div>`);
+  btnRow.querySelector('#addSet').addEventListener('click', ()=>{
+    logSetRows.push(logSetRows.length ? logSetRows[logSetRows.length-1] : 1);
+    renderSetRows(document.getElementById('setRows'));
+  });
+  btnRow.querySelector('#rmSet').addEventListener('click', ()=>{
+    if(logSetRows.length>1){ logSetRows.pop(); renderSetRows(document.getElementById('setRows')); }
+  });
+  setsTile.appendChild(btnRow);
+  g.appendChild(setsTile);
+
+  const diffTile = el(`<div class="tile t-med"><div class="tile-title">How did it feel?</div></div>`);
+  const diffWrap = el('<div class="diff-group" id="diffGroup"></div>');
+  let selectedDiff = 'right';
+  [['easy','Easy'],['right','Just Right'],['hard','Hard']].forEach(([id,label])=>{
+    const opt = el(`<div class="diff-opt${id==='right'?' selected':''}" data-diff="${id}">${label}</div>`);
+    opt.addEventListener('click', ()=>{
+      selectedDiff = id;
+      diffWrap.querySelectorAll('.diff-opt').forEach(o=> o.classList.toggle('selected', o.dataset.diff===id));
+    });
+    diffWrap.appendChild(opt);
+  });
+  diffTile.appendChild(diffWrap);
+  g.appendChild(diffTile);
+
+  const extraTile = el(`<div class="tile t-med"><div class="tile-title">${profile.maxReps===0 ? 'First Strict Rep?' : 'Notes'}</div></div>`);
+  if(profile.maxReps===0){
+    extraTile.appendChild(el('<label>Strict pull-ups completed today (blank if none)</label>'));
+    extraTile.appendChild(el('<input type="number" id="strictInput" min="0" placeholder="e.g. 1" style="margin-bottom:0;">'));
+  } else {
+    extraTile.appendChild(el('<textarea id="notesInput" placeholder="Bar type, how it felt, anything to remember..." style="margin-bottom:0;"></textarea>'));
+  }
+  g.appendChild(extraTile);
+
+  if(profile.maxReps===0){
+    const notesTile = el(`<div class="tile t-full"><div class="tile-title">Notes</div></div>`);
+    notesTile.appendChild(el('<textarea id="notesInput" placeholder="Bar type, how it felt, anything to remember..." style="margin-bottom:0;"></textarea>'));
+    g.appendChild(notesTile);
+  }
+
+  const submitBtn = el('<button class="btn btn-cta" id="submitLog">Save Session</button>');
+  submitBtn.addEventListener('click', async ()=>{
+    const rows = Array.from(document.querySelectorAll('#setRows input')).map(i=> Math.max(0, parseInt(i.value)||0));
+    const totalReps = rows.reduce((a,b)=>a+b,0);
+    const topSet = rows.length ? Math.max(...rows) : 0;
+    const notesVal = (document.getElementById('notesInput') && document.getElementById('notesInput').value.trim()) || '';
+    const rx = currentRx;
+
+    const entry = {
+      id: Date.now().toString(),
+      date: todayStr(),
+      role: rx.role,
+      freshness: rx.freshness,
+      exercise: rx.exercise,
+      prescribed: {structure: rx.structure, sets: rx.sets||null, reps: rx.reps||null, restSec: rx.restSec, totalTarget: rx.totalTarget},
+      actualSets: rows,
+      totalReps,
+      topSet,
+      difficulty: selectedDiff,
+      notes: notesVal
+    };
+    workouts.push(entry);
+    await saveWorkouts(workouts);
+
+    if(profile.maxReps===0){
+      const sv = document.getElementById('strictInput');
+      const strictVal = sv ? parseInt(sv.value) : NaN;
+      if(strictVal && strictVal>=1){
+        pendingMaxUpdate = {newMax: strictVal, fromZero:true};
+      }
+    } else if(rx.role==='max'){
+      // Max day determines the max automatically when a new best is set
+      if(topSet > profile.maxReps){
+        profile.maxReps = topSet;
+        profile.maxRepsHistory.push({date: todayStr(), reps: topSet});
+        profile.lastTestDate = todayStr();
+        await saveProfile(profile);
+        infoNotice = `New max established: ${topSet}. Every training day now targets ${4*topSet} reps (4 × ${topSet}), and sub-max/ladder sessions are re-sized accordingly.`;
+      } else {
+        infoNotice = `Max day logged. Your best set was ${topSet}, which doesn't beat your current max of ${profile.maxReps}, so the max holds. Daily target stays at ${4*profile.maxReps} reps.`;
+      }
+    } else if(topSet > profile.maxReps){
+      pendingMaxUpdate = {newMax: topSet, fromZero:false};
+    }
+
+    currentRx = null;
+    logSetRows = [];
+    activeTab='today';
+    renderApp();
+  });
+  const submitTile = el(`<div class="tile t-full" style="padding:12px;"></div>`);
+  submitTile.appendChild(submitBtn);
+  g.appendChild(submitTile);
+}
+
+function buildSessionPlanIgnoringSameday(){
+  const saved = workouts;
+  const cloned = workouts.slice();
+  const lastIdx = cloned.length-1;
+  if(lastIdx>=0){
+    const fake = Object.assign({}, cloned[lastIdx]);
+    const d = new Date(fake.date+'T00:00:00'); d.setDate(d.getDate()-1);
+    fake.date = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    cloned[lastIdx] = fake;
+  }
+  workouts = cloned;
+  const plan = buildSessionPlan();
+  workouts = saved;
+  return plan;
+}
+
+function renderSetRows(container){
+  container.innerHTML = '';
+  logSetRows.forEach((val,i)=>{
+    const row = el(`
+      <div class="set-row">
+        <span class="idx">Set ${i+1}</span>
+        <input type="number" min="0" value="${val}">
+        <button class="rm" title="Remove">×</button>
+      </div>`);
+    row.querySelector('input').addEventListener('change', e=>{
+      logSetRows[i] = Math.max(0, parseInt(e.target.value)||0);
+    });
+    row.querySelector('.rm').addEventListener('click', ()=>{
+      if(logSetRows.length>1){ logSetRows.splice(i,1); renderSetRows(container); }
+    });
+    container.appendChild(row);
+  });
+}
+
+/* ----- History ----- */
+function colorHex(role){
+  const map = {foundation:'#6a747f', max:'#00f0ff', submax:'#5c7d9c', ladder:'#c2883f'};
+  return map[role] || '#5c7d9c';
+}
+
+function renderHistory(){
+  const view = document.getElementById('view-history');
+  view.innerHTML = '';
+  const g = grid();
+  view.appendChild(g);
+
+  if(workouts.length===0){
+    g.appendChild(el(`<div class="tile t-full empty"><h3>No sessions yet</h3><p>Once you log a session it'll show up here as a tally mark, chalk-wall style.</p></div>`));
+    return;
+  }
+
+  const sorted = workouts.slice().sort((a,b)=> (a.date+a.id).localeCompare(b.date+b.id));
+  const totalReps = workouts.reduce((s,w)=>s+w.totalReps,0);
+
+  g.appendChild(el(`<div class="tile t-stat">${icon('list','#5c7d9c')}<div class="stat-num">${workouts.length}</div><div class="stat-lbl">Sessions Logged</div></div>`));
+  g.appendChild(el(`<div class="tile t-stat">${icon('pulse','#c2883f')}<div class="stat-num">${totalReps}</div><div class="stat-lbl">Total Reps</div></div>`));
+
+  const wallTile = el(`<div class="tile t-med"><div class="tile-title">Session Wall</div></div>`);
+  const wall = el('<div class="tally-wall"></div>');
+  for(let i=0;i<sorted.length;i+=5){
+    wall.appendChild(bundleSVG(sorted.slice(i,i+5)));
+  }
+  wallTile.appendChild(wall);
+  wallTile.appendChild(el(`
+    <div class="legend">
+      <span><i class="dot" style="background:#6a747f"></i>Foundation</span>
+      <span><i class="dot" style="background:#00f0ff"></i>Max</span>
+      <span><i class="dot" style="background:#5c7d9c"></i>Sub-Max</span>
+      <span><i class="dot" style="background:#c2883f"></i>Ladder</span>
+    </div>`));
+  g.appendChild(wallTile);
+
+  const listTile = el(`<div class="tile t-full"><div class="tile-title">Session Log</div></div>`);
+  let confirmDeleteId = null;
+  const rerenderList = ()=>{
+    const items = listTile.querySelectorAll('.hist-item');
+    items.forEach(n=>n.remove());
+    const p = listTile.querySelector('p'); if(p) p.remove();
+    sorted.slice().reverse().forEach(w=>{
+      const meta = DAY_META[w.role || w.dayType];
+      const noteHtml = w.notes ? `<div class="t" style="font-style:italic;opacity:.75;">"${esc(w.notes)}"</div>` : '';
+      const armed = confirmDeleteId === w.id;
+      const rightHtml = armed
+        ? `<button class="btn small" style="border-color:var(--danger);color:var(--danger);padding:6px 10px;font-size:10px;" data-act="del">Confirm</button>`
+        : `<div><div class="r mono">${w.totalReps}</div><div class="x">top ${w.topSet}</div></div>`;
+      const item = el(`
+        <div class="hist-item">
+          <div class="hist-left">
+            <div class="d">${esc(fmtDate(w.date))} · ${esc(meta ? meta.name : (w.role||w.dayType||'session'))}</div>
+            <div class="t">${esc(w.exercise||'')} · ${esc((w.actualSets||[]).join('-'))}</div>
+            ${noteHtml}
+          </div>
+          <div class="hist-right">${rightHtml}</div>
+        </div>`);
+      const del = item.querySelector('[data-act=del]');
+      if(del){
+        del.addEventListener('click', async (e)=>{
+          e.stopPropagation();
+          workouts = workouts.filter(x=> x.id!==w.id);
+          await saveWorkouts(workouts);
+          confirmDeleteId = null;
+          renderApp();
+        });
+      }
+      item.addEventListener('click', ()=>{
+        confirmDeleteId = confirmDeleteId===w.id ? null : w.id;
+        rerenderList();
+        if(confirmDeleteId){
+          setTimeout(()=>{ if(confirmDeleteId===w.id){ confirmDeleteId=null; rerenderList(); } }, 3500);
+        }
+      });
+      listTile.appendChild(item);
+    });
+    listTile.appendChild(el('<p style="font-size:10.5px;color:var(--text-dim);margin-top:8px;">Tap a session to reveal a delete button.</p>'));
+  };
+  rerenderList();
+  g.appendChild(listTile);
+}
+
+function bundleSVG(group){
+  const w = 64, h = 34;
+  let inner = '';
+  group.slice(0,4).forEach((s,i)=>{
+    const x = 8 + i*15;
+    const rot = (i%2===0? -3:3);
+    inner += `<line x1="${x}" y1="30" x2="${x+2}" y2="4" stroke="${colorHex(s.role||s.dayType)}" stroke-width="3" stroke-linecap="round" transform="rotate(${rot} ${x} 17)"><title>${fmtDate(s.date)} · ${s.totalReps} reps</title></line>`;
+  });
+  if(group.length===5){
+    const s = group[4];
+    inner += `<line x1="2" y1="30" x2="58" y2="4" stroke="${colorHex(s.role||s.dayType)}" stroke-width="3" stroke-linecap="round"><title>${fmtDate(s.date)} · ${s.totalReps} reps</title></line>`;
+  }
+  return el(`<svg width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${inner}</svg>`);
+}
+
+/* ----- Progress ----- */
+function renderProgress(){
+  const view = document.getElementById('view-progress');
+  view.innerHTML = '';
+  const g = grid();
+  view.appendChild(g);
+
+  const M = profile.maxReps;
+
+  const ladderTile = el(`<div class="tile t-med"><div class="tile-title">Ladder to 20</div></div>`);
+  ladderTile.appendChild(ladderSVG(M, 20, false));
+  if(M===0){
+    ladderTile.appendChild(el('<p style="font-size:12px;color:var(--text-dim);margin-top:8px;">Zero-to-one phase — no strict rep yet. Every negative and jump is building toward rung 1.</p>'));
+  }
+  g.appendChild(ladderTile);
+
+  if(profile.maxRepsHistory && profile.maxRepsHistory.length>1){
+    const histTile = el(`<div class="tile t-med"><div class="tile-title">Max Reps Over Time</div></div>`);
+    histTile.appendChild(sparklineSVG(profile.maxRepsHistory));
+    g.appendChild(histTile);
+  } else {
+    g.appendChild(el(`<div class="tile t-med"><div class="tile-title">Max Reps Over Time</div><p style="font-size:12.5px;color:var(--text-dim);margin:0;">Log a couple of Max Days to see your trend line here.</p></div>`));
+  }
+
+  const started = profile.startDate ? fmtDate(profile.startDate) : '—';
+  g.appendChild(el(`<div class="tile t-stat">${icon('calendar','#5c7d9c')}<div class="stat-num" style="font-size:16px;">${started}</div><div class="stat-lbl">Tracking Since</div></div>`));
+  g.appendChild(el(`<div class="tile t-stat">${icon('list','#c2883f')}<div class="stat-num">${workouts.length}</div><div class="stat-lbl">Sessions Logged</div></div>`));
+
+  if(M>0){
+    const nextNum = realSessionCount()+1;
+    const nextIsMax = (nextNum-1)%3===0;
+    const nextColor = nextIsMax ? '#00f0ff' : '#7b3fe4';
+    g.appendChild(el(`<div class="tile t-stat">${icon('bolt','#00f0ff')}<div class="stat-num">${nextNum}</div><div class="stat-lbl">Next Session #</div></div>`));
+    g.appendChild(el(`<div class="tile t-stat">${icon('target', nextColor)}<div class="stat-num" style="font-size:15px;color:${nextColor}">${nextIsMax?'MAX':'VOL'}</div><div class="stat-lbl">Next Day Type</div></div>`));
+  }
+
+  if(M>0){
+    const rv = rollingVolume(7);
+    const wk = 4*M*3;
+    const pct = Math.min(100, Math.round(rv/wk*100));
+    g.appendChild(el(`
+      <div class="tile t-full">
+        <div class="tile-title">Rolling 7-Day Volume</div>
+        <div class="pbar-track"><div class="pbar-fill" style="width:${pct}%"></div></div>
+        <div class="pbar-caption"><span>${rv} reps</span><span>~${wk} across a full week</span></div>
+      </div>`));
+  }
+}
+
+function ladderSVG(M, goal, compact){
+  const rungCount = 20;
+  const spacing = compact ? 11 : 20;
+  const railX1 = compact ? 20 : 30;
+  const railX2 = compact ? 90 : 170;
+  const topPad = compact ? 10 : 16;
+  const botPad = compact ? 18 : 30;
+  const height = rungCount*spacing + topPad + botPad;
+  let rungs = '';
+  for(let i=1;i<=rungCount;i++){
+    const y = height - botPad - (i-1)*spacing;
+    const filled = i<=M;
+    const isGoal = i===goal;
+    const showLabel = compact ? (i===M || i===goal) : ((i%5===0) || i===M);
+    rungs += `<line x1="${railX1}" y1="${y}" x2="${railX2}" y2="${y}" stroke="${filled?'#5c7d9c':'#262b30'}" stroke-width="${isGoal?4:(compact?2:3)}" />`;
+    if(isGoal){ rungs += `<circle cx="${railX2+10}" cy="${y}" r="${compact?4:5}" fill="var(--bat)" />`; }
+    if(showLabel){
+      const fs = compact ? 9 : 11;
+      rungs += `<text x="${railX2+(compact?16:20)}" y="${y+4}" font-size="${fs}" fill="${i===M?'var(--bat)':'#5a7099'}" font-family="Share Tech Mono, monospace">${i}${(!compact && i===M)?' ◂ you':''}</text>`;
+    }
+  }
+  const vbW = compact ? 130 : 260;
+  return el(`
+    <svg width="100%" viewBox="0 0 ${vbW} ${height}" style="max-width:${compact?200:280}px;display:block;margin:0 auto;">
+      <line x1="${railX1}" y1="${topPad}" x2="${railX1}" y2="${height-botPad}" stroke="#262b30" stroke-width="4" stroke-linecap="round"/>
+      <line x1="${railX2}" y1="${topPad}" x2="${railX2}" y2="${height-botPad}" stroke="#262b30" stroke-width="4" stroke-linecap="round"/>
+      ${rungs}
+    </svg>`);
+}
+
+function sparklineSVG(history){
+  const w=240, h=80, pad=10;
+  const vals = history.map(p=>p.reps);
+  const max = Math.max(...vals, 1), min = Math.min(...vals, 0);
+  const range = Math.max(1, max-min);
+  const stepX = (w-2*pad)/Math.max(1,history.length-1);
+  const pts = history.map((p,i)=>{
+    const x = pad + i*stepX;
+    const y = h-pad - ((p.reps-min)/range)*(h-2*pad);
+    return `${x},${y}`;
+  }).join(' ');
+  return el(`
+    <svg width="100%" viewBox="0 0 ${w} ${h}">
+      <polyline points="${pts}" fill="none" stroke="#5c7d9c" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+      ${history.map((p,i)=>{
+        const x = pad + i*stepX;
+        const y = h-pad - ((p.reps-min)/range)*(h-2*pad);
+        return `<circle cx="${x}" cy="${y}" r="3" fill="var(--bat)"><title>${fmtDate(p.date)}: ${p.reps}</title></circle>`;
+      }).join('')}
+    </svg>`);
+}
+
+/* ---------- onboarding ---------- */
+function renderOnboarding(){
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  const g = grid();
+  app.appendChild(g);
+  const tile = el(`
+    <div class="tile t-full" style="border-color:${hexToRgba('#00f0ff',.3)}">
+      ${BAT_EMBLEM}
+      <div class="tile-title">Set your baseline</div>
+      <h3 style="margin-bottom:10px;font-size:19px;">How many strict pull-ups can you do right now?</h3>
+      <p style="font-size:13px;color:#aab1b8;margin-bottom:14px;line-height:1.55;position:relative;">
+        One clean set — dead hang to chin over bar, no kipping. Enter 0 if you can't do one yet and you'll start on
+        negatives and jumping pull-ups. Otherwise your first session is a Max Effort Day, which sets the number that
+        drives all your volume (4× your max, every day).
+      </p>
+      <input type="number" id="baselineInput" min="0" placeholder="e.g. 5">
+      <button class="btn btn-cta" id="startBtn">Begin</button>
+    </div>`);
+  tile.querySelector('#startBtn').addEventListener('click', async ()=>{
+    const val = Math.max(0, parseInt(document.getElementById('baselineInput').value) || 0);
+    const today = todayStr();
+    profile = {
+      goal: 20,
+      maxReps: val,
+      maxRepsHistory: [{date: today, reps: val}],
+      startDate: today,
+      lastTestDate: today
+    };
+    await saveProfile(profile);
+    renderApp();
+  });
+  g.appendChild(tile);
+}
+
+/* ---------- init ---------- */
+// One-time migration from any earlier storage key names, so a rename never loses data.
+const LEGACY_KEYS = [
+  {profile:'tolgas-pullup-program-profile', workouts:'tolgas-pullup-program-workouts'},
+  {profile:'darknight-pullup-profile',      workouts:'darknight-pullup-workouts'},
+  {profile:'tolga-pullup-profile',          workouts:'tolga-pullup-workouts'},
+  {profile:'pullup-profile',                workouts:'pullup-workouts'}
+];
+async function migrateLegacyData(){
+  for(const k of LEGACY_KEYS){
+    let oldProfile = null;
+    try{ const v = localStorage.getItem(k.profile); if(v) oldProfile = JSON.parse(v); }catch(e){}
+    if(!oldProfile) continue;
+    let oldWorkouts = [];
+    try{ const v = localStorage.getItem(k.workouts); if(v) oldWorkouts = JSON.parse(v); }catch(e){}
+    await saveProfile(oldProfile);
+    await saveWorkouts(oldWorkouts);
+    try{ localStorage.removeItem(k.profile); }catch(e){}
+    try{ localStorage.removeItem(k.workouts); }catch(e){}
+    return true;
+  }
+  return false;
+}
+
+async function init(){
+  profile = await loadProfile();
+  workouts = await loadWorkouts();
+  if(!profile){
+    const migrated = await migrateLegacyData();
+    if(migrated){
+      profile = await loadProfile();
+      workouts = await loadWorkouts();
+    }
+  }
+  if(!profile){ renderOnboarding(); return; }
+  renderApp();
+}
+
+const resetBtn = document.getElementById('resetBtn');
+let resetArmed = false;
+resetBtn.addEventListener('click', async ()=>{
+  if(!resetArmed){
+    resetArmed = true;
+    resetBtn.textContent = 'Tap again to confirm — this deletes everything';
+    resetBtn.style.color = 'var(--danger)';
+    setTimeout(()=>{ resetArmed=false; resetBtn.textContent='Reset all program data'; resetBtn.style.color=''; }, 4000);
+    return;
+  }
+  try{ localStorage.removeItem(KEY_PROFILE); }catch(e){}
+  try{ localStorage.removeItem(KEY_WORKOUTS); }catch(e){}
+  profile = null; workouts = []; currentRx = null; logSetRows = []; pendingMaxUpdate = null; infoNotice = null;
+  resetArmed = false; resetBtn.textContent = 'Reset all program data'; resetBtn.style.color = '';
+  renderOnboarding();
+});
+
+init();
+</script>
+</body>
+</html>
